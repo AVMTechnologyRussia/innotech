@@ -4,7 +4,8 @@ $database   = "a0193618_hackathon_innotech";
 $usernameBD = "a0193618_hackathon_innotech";
 $passwordBD = "1234user";
 $usernameUE = $_REQUEST["Username"];
-$highscoreUE = $_REQUEST["Score"];
+$ratingUE = $_REQUEST["Rating"];
+$coinsUE = $_REQUEST["Coins"];
 
 $conn = mysqli_connect($servername, $usernameBD, $passwordBD, $database) or die("Connection failed");
 
@@ -22,7 +23,7 @@ if (empty($login)) {
     echo json_encode ($JsonErr);
     //echo ($registerResult);
 }else{
-    $updateSQL = "UPDATE Users SET Score = '$highscoreUE' WHERE Username = '$usernameUE'";
+    $updateSQL = "UPDATE Users SET (Rating, Score) = ('$ratingUE', '$coinsUE') WHERE Username = '$usernameUE'";
     $updateResult = $conn->query($updateSQL);
     $JsonArray=array('response' => $updateResult);
     echo json_encode ($JsonArray);

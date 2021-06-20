@@ -16,12 +16,13 @@ while ($row = $loginResult->fetch_assoc()) {
 }
 
 if (!empty($login)) {
-    $scoreSQL    = "SELECT Score FROM Users WHERE Username = '$login'";
+    $scoreSQL    = "SELECT * FROM Users WHERE Username = '$login'";
     $scoreResult = $conn->query($scoreSQL);
     while ($row = $scoreResult->fetch_assoc()) {
-        $Score = $row["Score"];
+        $Rating = $row["Rating"];
+        $Coins = $row["Coins"];
     }
-    $JsonResponse=array('Score' => (int)$Score);
+    $JsonResponse=array('Rating' => (int)$Rating, 'Coins' => (int)$Coins);
     echo json_encode ($JsonResponse);
 }
 mysqli_close($conn);
